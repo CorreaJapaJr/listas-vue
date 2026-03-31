@@ -6,8 +6,8 @@
       <button 
       :class="btnaddClass"
       @click="handleShowForm">{{ btnAddtext }}</button>
-      <button class="btn-clear">Limpar Tarefas</button>
-      <button class="btn-all">Marcar Todas</button>
+      <button class="btn-clear" @click="clearTasks">Limpar Tarefas</button>
+      <button class="btn-all" @click="markAllDone">Marcar Todas</button>
     </div>
 
     <div 
@@ -16,7 +16,7 @@
       <input
         v-model="newTaskTitle"
         type="text"
-        placeholder="Buscar tarefas..."
+        placeholder="Digite a nova tarefa..."
         class="task-input"
       />
       <button @click="AddTask" class="btn-add">Adicionar Tarefa</button>
@@ -56,10 +56,10 @@
 
         <div>
             <h3>Resumo</h3>
-            <p v-if="tasks.length === 0">Voce ainda não possui tarefas</p>
-            <p v-else-if="pendingTasks.length > 0 && completedTasks.length === 0">Voce tem {{ pendingTasks.length }} tarefas</p>
-            <p v-else-if="completedTasks.length > 0 && pendingTasks.length === 0">voce tem todas as tarefas concluidas</p>
-            <p v-else>Voce tem {{ pendingTasks.length }} pendetes e {{ completedTasks.length }} concluidas </p>
+            <p v-if="tasks.length === 0">Você ainda não possui tarefas</p>
+            <p v-else-if="pendingTasks.length > 0 && completedTasks.length === 0">Você tem {{ pendingTasks.length }} tarefas</p>
+            <p v-else-if="completedTasks.length > 0 && pendingTasks.length === 0">Você tem todas as tarefas concluídas</p>
+            <p v-else>Você tem {{ pendingTasks.length }} pendentes e {{ completedTasks.length }} concluídas</p>
         </div>
 
     <div class="watch-container">
@@ -144,6 +144,12 @@
       },
       handleShowForm() {
         this.showForm = !this.showForm;
+      },
+      clearTasks() {
+        this.tasks = [];
+      },
+      markAllDone() {
+        this.tasks.forEach(task => task.done = true);
       },
     },
     watch: {

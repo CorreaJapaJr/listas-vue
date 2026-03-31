@@ -2,7 +2,7 @@
     <div class="task-item">
         <span class="task-id">#{{ task?.id }}</span>
         <span class="task-title">{{ task?.title }}</span>
-        <span class="task-status">{{ btntoggleStatus }}</span>
+        <span :class="['task-status', { 'status-done': task?.done }]">{{ btntoggleStatus }}</span>
         <button class="task-complete" @click="toggleDone"  >{{btnToggleText}}</button>
         <button class="task-remove" @click="removeTask">Remover</button>
     </div>
@@ -30,7 +30,7 @@ export default {
             return this.task?.done ? 'Desfazer' : 'Concluir';
         },
         btntoggleStatus(){
-            return this.task?.done ? 'pendente' : 'concluída';
+            return this.task?.done ? 'concluída' : 'pendente';
         }
     }
 };
@@ -113,7 +113,14 @@ export default {
     border-radius: 2px;
     border: 1px solid currentColor;
     flex-shrink: 0;
-    /* cores definidas por classe pai (done/pendente) */
+    /* Cores padrão (Pendente - Mogno) */
+    color: #8b3a2f;
+    border-color: #8b3a2f;
+    background-color: rgba(139, 58, 47, 0.1);
+}
+
+/* Status Concluído (Musgo) */
+.task-status.status-done {
     color: #4a7c59;
     border-color: #4a7c59;
     background-color: rgba(74, 124, 89, 0.1);
