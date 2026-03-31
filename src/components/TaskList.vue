@@ -186,122 +186,281 @@
 </script>
 
 <style>
-/* Configurações Gerais */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #e9ecef;
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-}
+/* =====================================================
+   TEMA RETRÔ — TaskList
+   Paleta: sépia, papiro, verde musgo, mogno
+   ===================================================== */
 
+/* Container principal — cartão de papel envelhecido */
 .container {
-  max-width: 850px;
+  max-width: 860px;
   width: 100%;
   margin: 0 auto;
-  padding: 30px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 36px 40px;
+  background-color: #f5edda;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23f5edda'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23e8dcc4' opacity='0.4'/%3E%3C/svg%3E");
+  border: 3px double #8b6914;
+  border-radius: 2px;
+  box-shadow:
+    4px 4px 0 #7a5c10,
+    8px 8px 0 rgba(0,0,0,0.15),
+    inset 0 0 60px rgba(139, 105, 20, 0.08);
+  position: relative;
 }
 
-/* Área de Input e Botões Principais */
+/* Faixa decorativa no topo */
+.container::before {
+  content: '✦  LISTA DE TAREFAS  ✦';
+  display: block;
+  text-align: center;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: #8b6914;
+  border-bottom: 1px solid #c9a84c;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+/* Título principal */
+.container h1 {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 2rem;
+  color: #3b2a09;
+  text-align: center;
+  margin: 0 0 28px 0;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+  border-bottom: 2px solid #c9a84c;
+  padding-bottom: 16px;
+}
+
+/* Seção de resumo */
+.container > div h3 {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  color: #5c3d11;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.container > div > p {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  color: #6b4e1a;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* ---- Controles / Barra de Ações ---- */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+/* ---- Formulário de Adicionar ---- */
 .add-task-container {
   display: flex;
   gap: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 26px;
 }
 
 .task-input {
   flex: 1;
-  padding: 12px 15px;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: #3b2a09;
+  background-color: #fdf6e3;
+  border: 2px solid #c9a84c;
+  border-radius: 2px;
   outline: none;
-  transition: border-color 0.3s;
+  box-shadow: inset 2px 2px 4px rgba(139, 105, 20, 0.12);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.task-input::placeholder {
+  color: #b09060;
+  font-style: italic;
 }
 
 .task-input:focus {
-  border-color: #007bff;
+  border-color: #8b6914;
+  box-shadow: inset 2px 2px 4px rgba(139, 105, 20, 0.2), 0 0 0 3px rgba(201, 168, 76, 0.2);
 }
 
-.controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* Botões */
+/* ---- Botões — estilo carimbo/relevo retrô ---- */
 .btn-add, .btn-clear, .btn-all, .btn-close {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: 2px;
   cursor: pointer;
-  transition: filter 0.2s, transform 0.1s;
+  transition: transform 0.1s, box-shadow 0.1s, filter 0.15s;
+  position: relative;
 }
 
-.btn-add { background-color: #28a745; color: white; }
-.btn-clear { background-color: #dc3545; color: white; }
-.btn-all { background-color: #007bff; color: white; }
-.btn-close { background-color: #6c757d; color: white; }
-
-.btn-add:hover, .btn-clear:hover, .btn-all:hover {
-  filter: brightness(90%);
+/* Verde musgo — Adicionar */
+.btn-add {
+  background-color: #4a7c59;
+  color: #f0ead2;
+  border: 2px solid #2e5c3a;
+  box-shadow: 3px 3px 0 #1e3d26;
 }
 
-.btn-add:active { transform: scale(0.98); }
+/* Mogno escuro — Limpar */
+.btn-clear {
+  background-color: #8b3a2f;
+  color: #f0ead2;
+  border: 2px solid #5c2218;
+  box-shadow: 3px 3px 0 #3a1510;
+}
 
-/* Colunas de Tarefas */
+/* Azul ardósia — Marcar Todas */
+.btn-all {
+  background-color: #4a6580;
+  color: #f0ead2;
+  border: 2px solid #2e4a5c;
+  box-shadow: 3px 3px 0 #1e3040;
+}
+
+/* Cinza sépia — Fechar */
+.btn-close {
+  background-color: #7a6a4f;
+  color: #f0ead2;
+  border: 2px solid #5c4e38;
+  box-shadow: 3px 3px 0 #3d3425;
+}
+
+.btn-add:hover, .btn-clear:hover, .btn-all:hover, .btn-close:hover {
+  filter: brightness(1.1);
+}
+
+.btn-add:active, .btn-clear:active, .btn-all:active, .btn-close:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 transparent;
+}
+
+/* ---- Colunas de Tarefas ---- */
 .task-container {
   display: flex;
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 28px;
 }
 
 .pending-tasks, .completed-task {
   flex: 1;
-  border: 1px solid #edf2f7;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: #f8f9fa;
+  background-color: #fdf6e3;
+  border: 1px solid #c9a84c;
+  border-radius: 2px;
+  padding: 16px;
   min-height: 200px;
+  box-shadow: inset 0 1px 4px rgba(139, 105, 20, 0.1);
 }
 
 .pending-tasks h2, .completed-task h2 {
-  font-size: 1.1rem;
-  color: #4a5568;
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #5c3d11;
   margin-top: 0;
-  border-bottom: 2px solid #dee2e6;
   padding-bottom: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 14px;
   text-align: center;
+  border-bottom: 2px dashed #c9a84c;
 }
 
-/* Área de Logs/Console (Watch) */
+.pending-tasks > p, .completed-task > p {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-style: italic;
+  color: #a08050;
+  font-size: 0.88rem;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* ---- Terminal DOS — Logs do Watch ---- */
 .watch-container {
-  background-color: #1e293b;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
+  background-color: #0d0d0d;
+  border: 2px solid #3a3a3a;
+  border-radius: 2px;
+  padding: 0;
+  margin-top: 28px;
+  box-shadow: 4px 4px 0 #000, inset 0 0 30px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+/* Barra de título de janela DOS */
+.watch-container h3 {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 1rem;
+  color: #000;
+  background-color: #aaaaaa;
+  margin: 0;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.watch-container h3::before {
+  content: '■ □ □';
+  font-size: 0.7rem;
+  letter-spacing: 3px;
 }
 
 .log-container {
-  max-height: 200px;
+  max-height: 180px;
   overflow-y: auto;
-  font-family: 'Fira Code', 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #38bdf8; /* Azul neon suave para leitura */
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #33ff33;
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  text-shadow: 0 0 8px rgba(51, 255, 51, 0.6);
 }
 
-/* Scrollbar Personalizada para o Log */
-.log-container::-webkit-scrollbar {
-  width: 6px;
+/* Cursor piscante estilo terminal */
+.log-container::after {
+  content: '█';
+  animation: blink 1s step-end infinite;
+  color: #33ff33;
 }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Scrollbar estilo terminal */
+.log-container::-webkit-scrollbar { width: 8px; }
+.log-container::-webkit-scrollbar-track { background: #111; }
 .log-container::-webkit-scrollbar-thumb {
-  background: #475569;
-  border-radius: 10px;
+  background: #33ff33;
+  border-radius: 0;
 }
 
+/* Span de placeholder dentro das listas */
+.task-container span,
+.completed-task span {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #b09060;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+}
 </style>
+

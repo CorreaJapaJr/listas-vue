@@ -38,81 +38,120 @@ export default {
 
 
 <style>
-/* Item da Tarefa */
+/* =====================================================
+   TEMA RETRÔ — TaskTeste (Card de Tarefa)
+   Visual: ficha datilografada, papel envelhecido
+   ===================================================== */
+
 .task-item {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Garante que o texto fique de um lado e botões do outro */
-    gap: 15px;
-    padding: 12px 18px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    background-color: #fff;
-    transition: box-shadow 0.2s ease;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    background-color: #fdf6e3;
+    border: 1px solid #c9a84c;
+    border-left: 4px solid #8b6914;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+}
+
+/* Linha perfurada no topo — papel de fichário */
+.task-item::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent 4px,
+        #c9a84c55 4px,
+        #c9a84c55 8px
+    );
 }
 
 .task-item:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transform: translateX(3px);
+    box-shadow: -3px 0 0 #8b6914, 3px 3px 0 rgba(139, 105, 20, 0.2);
 }
 
-/* Informações da Tarefa (ID e Texto) */
-.task-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-grow: 1;
-}
-
+/* Badge de ID — estilo carimbo numerado */
 .task-id {
-    font-weight: bold;
-    color: #6c757d;
-    font-size: 0.9em;
-    background: #f1f3f5;
-    padding: 2px 6px;
-    border-radius: 4px;
+    font-family: 'VT323', 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: normal;
+    color: #fff;
+    background-color: #8b6914;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    box-shadow: 1px 1px 0 #5c4a0c;
 }
 
+/* Título da tarefa */
+.task-title {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: #3b2a09;
+    flex: 1;
+    letter-spacing: 0.3px;
+}
+
+/* Status da tarefa — badge colorido */
 .task-status {
-    font-weight: 600;
-    color: #28a745;
-    font-size: 0.85em;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 0.7rem;
     text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    flex-shrink: 0;
+    /* cores definidas por classe pai (done/pendente) */
+    color: #4a7c59;
+    border-color: #4a7c59;
+    background-color: rgba(74, 124, 89, 0.1);
 }
 
-/* Grupo de Botões de Ação */
-.task-actions {
-    display: flex;
-    gap: 8px;
-}
-
-/* Estilização Geral dos Botões de Tarefa */
+/* Botões de ação — carimbo retrô pequeno */
 .task-complete, .task-remove {
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
     cursor: pointer;
-    font-size: 0.85em;
-    font-weight: 500;
-    transition: opacity 0.2s, transform 0.1s;
+    flex-shrink: 0;
+    transition: transform 0.1s, box-shadow 0.1s, filter 0.15s;
 }
 
 .task-complete {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #4a7c59;
+    color: #f0ead2;
+    border: 2px solid #2e5c3a;
+    box-shadow: 2px 2px 0 #1e3d26;
 }
 
 .task-remove {
-    background-color: #ef4444;
-    color: white;
+    background-color: #8b3a2f;
+    color: #f0ead2;
+    border: 2px solid #5c2218;
+    box-shadow: 2px 2px 0 #3a1510;
 }
 
 .task-complete:hover, .task-remove:hover {
-    opacity: 0.9;
+    filter: brightness(1.12);
 }
 
 .task-complete:active, .task-remove:active {
-    transform: scale(0.95);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 transparent;
 }
-
-</style>
+</style>
